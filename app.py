@@ -153,8 +153,22 @@ if run:
             labels = ["A", "B", "C"]
             values = jumlah_kardus
 
-            fig2, ax2 = plt.subplots(figsize=(4,3))  
-            ax2.pie(values, labels=labels, autopct="%1.1f%%")
+            fig2, ax2 = plt.subplots(figsize=(4,3))
+
+            # Cegah error jika semua nilai nol
+            if sum(values) > 0:
+                ax2.pie(values, labels=labels, autopct="%1.1f%%")
+            else:
+                ax2.text(
+                    0.5,
+                    0.5,
+                    "Tidak ada distribusi",
+                    ha="center",
+                    va="center",
+                    fontsize=12
+                )
+                ax2.set_axis_off()
+
             ax2.set_title("Proporsi")
             st.pyplot(fig2)
 
